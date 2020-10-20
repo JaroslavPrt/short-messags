@@ -1,0 +1,91 @@
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": false,
+  "eslint.validate": ["javascript", "typescript"],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[markdown]": {
+    "editor.formatOnSave": true
+  },
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/dist": true
+  },
+  "eslint.enable": true,
+  "cSpell.words": ["APAC", "EMEA", "conv", "genesys", "liveengage", "liveperson", "pino", "we", "webp"],
+  "files.associations": {
+    ".env": "dotenv"
+  },
+  "typescript.preferences.importModuleSpecifier": "relative",
+  "javascript.suggest.completeFunctionCalls": true,
+  "jest.enableInlineErrorMessages": true,
+  "editor.formatOnSaveMode": "modifications",
+  "codemetrics.nodeconfiguration.CaseClause": 0,
+  "importSorter.generalConfiguration.sortOnBeforeSave": true,
+  "importSorter.importStringConfiguration.maximumNumberOfImportExpressionsPerLine.type": "newLineEachExpressionAfterCountLimitExceptIfOnlyOne",
+  "importSorter.importStringConfiguration.maximumNumberOfImportExpressionsPerLine.count": 120,
+  "importSorter.importStringConfiguration.tabSize": 2,
+  "importSorter.importStringConfiguration.quoteMark": "single",
+  "importSorter.importStringConfiguration.trailingComma": "multiLine",
+  "importSorter.sortConfiguration.customOrderingRules.rules": [
+    {
+      "type": "importMember",
+      "regex": "^$",
+      "orderLevel": 1
+    },
+    {
+      "regex": "^[@]",
+      "orderLevel": 2
+    },
+    {
+      "regex": ".*/entities",
+      "orderLevel": 40
+    },
+    {
+      "regex": ".*/ports/in",
+      "orderLevel": 41
+    },
+    {
+      "regex": ".*/ports/out",
+      "orderLevel": 42
+    },
+    {
+      "regex": ".*/services",
+      "orderLevel": 43
+    },
+    {
+      "regex": "domains*",
+      "orderLevel": 44
+    },
+    {
+      "regex": "adapters",
+      "orderLevel": 30
+    },
+    {
+      "regex": "modules",
+      "orderLevel": 31
+    },
+    {
+      "regex": "^./.*",
+      "orderLevel": 56
+    },
+    {
+      "regex": "^[.]",
+      "orderLevel": 51
+    }
+  ]
+}
