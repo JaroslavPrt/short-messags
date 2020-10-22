@@ -26,7 +26,18 @@
     "**/dist": true
   },
   "eslint.enable": true,
-  "cSpell.words": ["APAC", "EMEA", "conv", "genesys", "liveengage", "liveperson", "pino", "we", "webp"],
+  "cSpell.words": [
+    "APAC",
+    "EMEA",
+    "conv",
+    "genesys",
+    "liveengage",
+    "liveperson",
+    "pino",
+    "tslog",
+    "we",
+    "webp"
+  ],
   "files.associations": {
     ".env": "dotenv"
   },
