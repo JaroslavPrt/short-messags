@@ -13,6 +13,10 @@ class Config {
     return (util.getEnv('NODE_ENV') as Environments) ?? Environments.development;
   }
 
+  get appPort(): number {
+    return get('Customer.appPort') ?? 3000;
+  }
+
   get LogLevel(): TLogLevelName {
     return get('Customer.logLevel') || 'silly';
   }
