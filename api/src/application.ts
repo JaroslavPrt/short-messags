@@ -14,7 +14,7 @@ export enum OsSignals {
   SIGBREAK = 'SIGBREAK',
 }
 
-export abstract class Application {
+export class Application {
   protected shuttingDown = false;
 
   private counters = new Map<OsSignals, number>();
@@ -35,6 +35,10 @@ export abstract class Application {
 
     process.on('unhandledRejection', (reason, promise) => {
       this.log.error({ reason: reason.toString(), promise: promise.toString() }, 'unhandled rejection at promise');
+    });
+
+    this.router.get(['/health', '/ping'], (ctx) => {
+      ctx.status = 200;
     });
 
     this.http

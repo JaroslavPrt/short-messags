@@ -1,4 +1,8 @@
+/* eslint-disable import/first */
 /* eslint-disable class-methods-use-this */
+
+// eslint-disable-next-line @typescript-eslint/dot-notation
+process.env['NODE_CONFIG_DIR'] = `${__dirname}/config`;
 
 import { util, get, has } from 'config';
 import { TLogLevelName } from 'tslog';
