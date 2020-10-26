@@ -37,11 +37,13 @@
   },
   "dependencies": {
     "@koa/router": "^9.4.0",
+    "class-transformer": "^0.3.1",
     "config": "^3.3.2",
     "koa": "^2.13.0",
     "koa-body": "^4.2.0",
     "rimraf": "^3.0.2",
-    "tslog": "^2.9.1"
+    "tslog": "^2.9.1",
+    "typeorm": "^0.2.28"
   },
   "husky": {
     "hooks": {

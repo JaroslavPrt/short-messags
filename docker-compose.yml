@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+  postgres:
+    image: "postgres:11-alpine"
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    volumes:
+      - sm-pg-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    ports:
+      - "8022:80"
+    volumes:
+      - sm-pg-admin:/var/lib/pgadmin
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin
+      - PGADMIN_DEFAULT_PASSWORD=admin
+
+volumes:
+  sm-pg-data:
+  sm-pg-admin:
