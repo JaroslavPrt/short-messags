@@ -15,7 +15,7 @@ export function tryCreateConnection(config: ConnectionOptions): Promise<Connecti
 
     if (err instanceof Error) {
       // eslint-disable-next-line no-console
-      console.error(`${err.message}. Retrying (${retryCount}) +${retryDelay}ms`);
+      console.error(`${err.message}. retrying db connection: (${retryCount}) +${retryDelay}ms`);
     }
     // if (config.logger instanceof TypeormPinoLogger) {
     //   config.logger.log('error', `${err.message}. Retrying (${retryCount}) +${retryDelay}ms`);
