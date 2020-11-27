@@ -4,7 +4,9 @@ services:
   postgres:
     image: "postgres:11-alpine"
     environment:
-      - POSTGRES_HOST_AUTH_METHOD=trust
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=short-messages
     volumes:
       - sm-pg-data:/var/lib/postgresql/data
     ports:
@@ -12,7 +14,6 @@ services:
 
   pgadmin:
     image: dpage/pgadmin4
-    restart: always
     ports:
       - "8022:80"
     volumes:

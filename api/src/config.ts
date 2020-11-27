@@ -25,6 +25,10 @@ class Config {
     return get('Customer.logLevel') || 'silly';
   }
 
+  get dbConfig() {
+    return get('Customer.database') || {};
+  }
+
   byKey(key: string): string | number | boolean {
     return has('key') && get(key);
   }

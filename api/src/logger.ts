@@ -2,7 +2,7 @@ import { AsyncLocalStorage } from 'async_hooks';
 import { Logger } from 'tslog';
 import { config, Environments } from './config';
 
-export function logger(name: string = ''): Logger {
+export function logger(name: string): Logger {
   let ns = name;
   const asyncLocalStorage: AsyncLocalStorage<{ requestId: string }> = new AsyncLocalStorage();
 

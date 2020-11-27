@@ -17,7 +17,8 @@
     "paths": {
       "@config": ["src/config"],
       "@logger": ["src/logger"],
-      "@constants": ["src/constants"]
+      "@constants": ["src/constants"],
+      "@db/*": ["src/db/*"]
     }
   },
   "include": ["src/**/*"]

@@ -7,17 +7,16 @@ const defaultConnectionOptions: ConnectionOptions = {
   port: 5432,
   username: 'admin',
   password: 'admin',
-  database: 'short-message',
-  entities: [resolve(__dirname, './entity/**/*.{js,ts}')],
-  migrations: [resolve(__dirname, './migration/**/*.{js,ts}')],
-  subscribers: [resolve(__dirname, './subscriber/**/*.{js,ts}')],
+  database: 'postgres',
+  entities: [resolve(__dirname, './entities/**/*.{js,ts}')],
+  migrations: [resolve(__dirname, './migrations/**/*.{js,ts}')],
   cli: {
-    entitiesDir: 'src/db/entity',
-    migrationsDir: 'src/db/migration',
-    subscribersDir: 'src/db/subscriber',
+    entitiesDir: 'src/db/entities',
+    migrationsDir: 'src/db/migrations',
   },
 };
 
-export function getConnectionOptions(opts: {}): ConnectionOptions {
+export function getConnectionOptions(opts: any): ConnectionOptions {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
   return { ...defaultConnectionOptions, ...opts };
 }
