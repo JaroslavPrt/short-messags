@@ -2,14 +2,13 @@ export default {
   Customer: {
     appPort: 7000,
     logLevel: 'silly',
-    dbConfig: {
+    database: {
+      type: 'postgres',
       host: 'localhost',
-      port: 5984,
-      dbName: 'customers',
-    },
-    credit: {
-      initialLimit: 100,
-      initialDays: 1,
+      port: 5432,
+      username: 'admin',
+      password: 'admin',
+      database: 'short-messages',
     },
   },
 };

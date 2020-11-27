@@ -9,7 +9,12 @@
     "dev": "ts-node ./src/main.ts",
     "dev:watch": "nodemon --exec npm run dev",
     "start": "node ./dist/main.js",
-    "lint": "eslint \"src/**/*.ts\" --fix"
+    "lint": "eslint \"src/**/*.ts\" --fix",
+    "lint-staged": "lint-staged",
+    "dev:typeorm": "ts-node ./node_modules/typeorm/cli.js -f ./src/db/configCli.ts",
+    "db:schema:sync": "ts-node ./node_modules/typeorm/cli.js schema:sync -f ./src/db/config.cli.ts",
+    "db:migration:run": "ts-node ./node_modules/typeorm/cli.js migration:run -f ./src/db/config.cli.ts",
+    "db:migration:generate": "ts-node ./node_modules/typeorm/cli.js migration:generate -f ./src/db/config.cli.ts -p -n"
   },
   "keywords": [],
   "author": "",
@@ -20,6 +25,7 @@
     "@types/koa-bodyparser": "^4.3.0",
     "@types/koa__router": "^8.0.2",
     "@types/node": "^14.6.3",
+    "@types/uuid": "^8.3.0",
     "@typescript-eslint/eslint-plugin": "^4.0.1",
     "@typescript-eslint/parser": "^4.0.1",
     "eslint": "^7.8.1",
@@ -37,16 +43,25 @@
   },
   "dependencies": {
     "@koa/router": "^9.4.0",
+    "class-transformer": "^0.3.1",
     "config": "^3.3.2",
     "koa": "^2.13.0",
     "koa-body": "^4.2.0",
+    "pg": "^8.5.1",
     "rimraf": "^3.0.2",
-    "tslog": "^2.9.1"
+    "tslog": "^2.9.1",
+    "typeorm": "^0.2.28",
+    "uuid": "^8.3.1"
+  },
+  "lint-staged": {
+    "src/**/*.ts": [
+      "npm run lint"
+    ]
   },
   "husky": {
     "hooks": {
-      "pre-commit": "pretty-quick --staged && lint-staged",
-      "pre-push": "npm run lint"
+      "pre-commit": "npm run lint-staged && pretty-quick --staged",
+      "pre-push": "npm run lint-staged && pretty-quick --staged"
     }
   }
 }

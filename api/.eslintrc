@@ -20,7 +20,9 @@
     "no-underscore-dangle": "off",
     "prettier/prettier": "error",
     "import/prefer-default-export": 0,
-    "no-shadow": "off"
+    "no-shadow": "off",
+    "camelcase": "off",
+    "@typescript-eslint/no-unsafe-assignment": ["error"]
   },
-  "ignorePatterns": "*.js"
+  "ignorePatterns": ["*.js", "src/db/migrations/*"]
 }
