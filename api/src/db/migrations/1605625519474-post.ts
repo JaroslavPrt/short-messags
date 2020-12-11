@@ -5,7 +5,7 @@ export class post1605625519474 implements MigrationInterface {
 
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(`
-            CREATE TABLE "post" (
+            CREATE TABLE IF NOT EXISTS "post" (
                 "id" uuid NOT NULL DEFAULT uuid_generate_v4(),
                 "title" character varying(255) NOT NULL,
                 "body" text NOT NULL,

@@ -1,5 +1,4 @@
-import { MigrationInterface, QueryRunner } from 'typeorm';
-// import { v4 as uuidv4 } from 'uuid';
+import { MigrationInterface } from 'typeorm';
 import { User } from '@db/entities/user';
 import { Post } from '@db/entities/post';
 import { getUserRepository, getPostRepository } from '../repositories';
@@ -37,8 +36,8 @@ function generateUserSeedPosts(user: User) {
   return posts;
 }
 
-export class seed0000000000001 implements MigrationInterface {
-  name = 'seed0000000000001';
+export class seed1607606234472 implements MigrationInterface {
+  name = 'seed1607606234472';
   userRepository = getUserRepository();
   postRepository = getPostRepository();
 
