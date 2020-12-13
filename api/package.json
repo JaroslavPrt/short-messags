@@ -2,21 +2,19 @@
   "name": "short-messages",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "npm run prebuild && tsc --project tsconfig.json",
+    "start": "node ./dist/main.js",
     "dev": "ts-node ./src/main.ts",
     "dev:watch": "nodemon --exec npm run dev",
-    "start": "node ./dist/main.js",
+    "format": "prettier --write \"src/**/*.ts\"",
     "lint": "eslint \"src/**/*.ts\" --fix",
     "lint-staged": "lint-staged",
-    "dev:typeorm": "ts-node ./node_modules/typeorm/cli.js -f ./src/db/configCli.ts",
     "db:schema:sync": "ts-node ./node_modules/typeorm/cli.js schema:sync -f ./src/db/config.cli.ts",
-    "db:migration:run": "ts-node ./node_modules/typeorm/cli.js migration:run -f ./src/db/config.cli.ts",
-    "db:migration:generate": "ts-node ./node_modules/typeorm/cli.js migration:generate -f ./src/db/config.cli.ts -p -n"
+    "typeorm:cli": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js -f ./src/infrastructure/persistence/config.cli.ts"
   },
-  "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
@@ -26,17 +24,17 @@
     "@types/koa__router": "^8.0.2",
     "@types/node": "^14.6.3",
     "@types/uuid": "^8.3.0",
-    "@typescript-eslint/eslint-plugin": "^4.0.1",
-    "@typescript-eslint/parser": "^4.0.1",
-    "eslint": "^7.8.1",
+    "@typescript-eslint/eslint-plugin": "^4.9.1",
+    "@typescript-eslint/parser": "^4.9.1",
+    "eslint": "^7.15.0",
     "eslint-config-airbnb-typescript": "^9.0.0",
-    "eslint-config-prettier": "^6.11.0",
+    "eslint-config-prettier": "^6.15.0",
     "eslint-import-resolver-typescript": "^2.3.0",
     "eslint-plugin-import": "^2.22.0",
-    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-prettier": "^3.2.0",
     "husky": "^4.2.5",
     "lint-staged": "^10.3.0",
-    "prettier": "^2.1.1",
+    "prettier": "^2.2.1",
     "pretty-quick": "^3.0.0",
     "ts-node": "^9.0.0",
     "typescript": "^4.0.2"
@@ -48,20 +46,17 @@
     "koa": "^2.13.0",
     "koa-body": "^4.2.0",
     "pg": "^8.5.1",
+    "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
+    "tsconfig-paths": "^3.9.0",
     "tslog": "^2.9.1",
-    "typeorm": "^0.2.28",
+    "typeorm": "^0.2.25",
     "uuid": "^8.3.1"
-  },
-  "lint-staged": {
-    "src/**/*.ts": [
-      "npm run lint"
-    ]
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint-staged && pretty-quick --staged",
-      "pre-push": "npm run lint-staged && pretty-quick --staged"
+      "pre-commit": "pretty-quick --staged && lint-staged",
+      "pre-push": "npm run lint"
     }
   }
 }

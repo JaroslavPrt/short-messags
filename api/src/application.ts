@@ -1,9 +1,11 @@
 import Koa from 'koa';
+
 import Router from '@koa/router';
 
 import { config } from './config';
 import { logger } from './logger';
 
+// eslint-disable-next-line no-shadow
 export enum OsSignals {
   SIGABRT = 'SIGABRT',
   SIGINT = 'SIGINT',

@@ -4,17 +4,18 @@
 // eslint-disable-next-line @typescript-eslint/dot-notation
 process.env['NODE_CONFIG_DIR'] = `${__dirname}/config`;
 
-import { util, get, has } from 'config';
+import { get, has, util } from 'config';
 import { TLogLevelName } from 'tslog';
 
-export enum Environments {
+// eslint-disable-next-line no-shadow
+export enum AppEnvironments {
   development = 'development',
   production = 'production',
 }
 
 class Config {
-  get nodeEnv(): Environments {
-    return (util.getEnv('NODE_ENV') as Environments) ?? Environments.development;
+  get nodeEnv(): AppEnvironments {
+    return (util.getEnv('NODE_ENV') as AppEnvironments) ?? AppEnvironments.development;
   }
 
   get appPort(): number {
@@ -25,8 +26,14 @@ class Config {
     return get('Customer.logLevel') || 'silly';
   }
 
-  get dbConfig() {
-    return get('Customer.database') || {};
+  get database(): {
+    host: string;
+    port: number;
+    username: string;
+    password: string;
+    database: string;
+  } {
+    return get('Customer.database');
   }
 
   byKey(key: string): string | number | boolean {

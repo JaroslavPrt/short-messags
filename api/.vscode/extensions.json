@@ -4,13 +4,13 @@
 
   // List of extensions which should be recommended for users of this workspace.
   "recommendations": [
-    "esbenp.prettier-vscode",
     "dbaeumer.vscode-eslint",
     "visualstudioexptteam.vscodeintellicode",
+    "esbenp.prettier-vscode",
     "editorconfig.editorconfig",
     "streetsidesoftware.code-spell-checker",
     "mikestead.dotenv",
-    "orta.vscode-jest"
+    "mike-co.import-sorter"
   ],
   // List of extensions recommended by VS Code that should not be recommended for users of this workspace.
   "unwantedRecommendations": []

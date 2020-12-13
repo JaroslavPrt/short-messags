@@ -1,7 +1,7 @@
 {
   "root": true,
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint", "prettier", "import"],
+  "plugins": ["@typescript-eslint", "prettier"],
   "extends": [
     "airbnb-typescript/base",
     "plugin:@typescript-eslint/eslint-recommended",
@@ -20,9 +20,7 @@
     "no-underscore-dangle": "off",
     "prettier/prettier": "error",
     "import/prefer-default-export": 0,
-    "no-shadow": "off",
-    "camelcase": "off",
-    "@typescript-eslint/no-unsafe-assignment": ["error"]
+    "max-len": ["error", { "code": 120 }]
   },
-  "ignorePatterns": ["*.js", "src/db/migrations/*"]
+  "ignorePatterns": ["*.js", "src/infrastructure/persistence/migrations/*"]
 }

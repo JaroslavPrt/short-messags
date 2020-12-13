@@ -1,6 +1,7 @@
 import { AsyncLocalStorage } from 'async_hooks';
 import { Logger } from 'tslog';
-import { config, Environments } from './config';
+
+import { AppEnvironments, config } from './config';
 
 export function logger(name: string): Logger {
   let ns = name;
@@ -13,7 +14,7 @@ export function logger(name: string): Logger {
   return new Logger({
     name: ns,
     minLevel: config.LogLevel,
-    type: config.nodeEnv === Environments.development ? 'pretty' : 'json',
+    type: config.nodeEnv === AppEnvironments.development ? 'pretty' : 'json',
     requestId: () => asyncLocalStorage.getStore()?.requestId,
   });
 }

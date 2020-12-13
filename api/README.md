@@ -1,10 +1,25 @@
-```sh
-# Install dependencies
+#### Install Dependencies
+
+```bash
 npm ci
+```
 
-# Generate rc config
-npm run db:migration:run
+## Database
 
-# Run migration
-npm run db:migration:generate -- <migration name>
+#### Run Migrations
+
+```bash
+npm run typeorm:cli -- schema:sync
+```
+
+#### Run Migrations
+
+```bash
+npm run typeorm:cli -- migration:run
+```
+
+#### Generate Migration
+
+```bash
+npm run typeorm:cli -- migration:generate -n migrationNameHere
 ```

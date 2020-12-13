@@ -1,8 +1,8 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, Unique } from 'typeorm';
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, Unique, UpdateDateColumn } from 'typeorm';
 
-@Entity()
+@Entity('users')
 @Unique(['username'])
-export class User {
+export class UserOrmEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
