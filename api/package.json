@@ -53,10 +53,15 @@
     "typeorm": "^0.2.25",
     "uuid": "^8.3.1"
   },
+  "lint-staged": {
+    "src/**/*.ts": [
+      "npm run lint"
+    ]
+  },
   "husky": {
     "hooks": {
-      "pre-commit": "pretty-quick --staged && lint-staged",
-      "pre-push": "npm run lint"
+      "pre-commit": "npm run lint-staged && pretty-quick --staged",
+      "pre-push": "npm run lint-staged && pretty-quick --staged"
     }
   }
 }
