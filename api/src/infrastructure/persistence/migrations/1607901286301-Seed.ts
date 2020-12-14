@@ -1,9 +1,9 @@
-import { getCustomRepository, MigrationInterface, QueryRunner } from 'typeorm';
+import '../../../bootstrap';
 
-import { PostOrmEntity } from '@infra/persistence/orm-entities/post';
-import { UserOrmEntity } from '@infra/persistence/orm-entities/user';
-import { PostRepositoryAdapterService } from '@infra/persistence/post/post-repository-adapter.service';
-import { UserRepositoryAdapterService } from '@infra/persistence/user/user-repository-adapter.service';
+import { MigrationInterface, QueryRunner } from 'typeorm';
+
+import { PostOrmEntity } from '@infra/persistence/orm-entities/post.orm-entity';
+import { UserOrmEntity } from '@infra/persistence/orm-entities/user.orm-entity';
 
 const seedUsers: Array<Partial<UserOrmEntity>> = [
   {
@@ -38,17 +38,18 @@ function generateUserSeedPosts(user: UserOrmEntity) {
   return posts;
 }
 
-export class seed1607606234472 implements MigrationInterface {
-  name = 'seed1607606234472';
-  userRepository = getCustomRepository(UserRepositoryAdapterService);
-  postRepository = getCustomRepository(PostRepositoryAdapterService);
+export class seed1607901286301 implements MigrationInterface {
+  name = 'seed1607901286301';
 
   public async up(queryRunner: QueryRunner): Promise<void> {
-    const seededUsers = await this.userRepository.save(seedUsers);
-    for (const seedUser of seededUsers) {
-      const seedPosts = generateUserSeedPosts(seedUser);
-      await this.postRepository.save(seedPosts);
+    const { raw } = await queryRunner.manager.createQueryBuilder().insert().into('users').values(seedUsers).execute();
+    let seedPosts: Partial<PostOrmEntity>[] = [];
+
+    for (const r of raw) {
+      seedPosts = seedPosts.concat(generateUserSeedPosts(r));
     }
+
+    await queryRunner.manager.createQueryBuilder().insert().into('posts').values(seedPosts).execute();
   }
 
   public async down(): Promise<void> {}

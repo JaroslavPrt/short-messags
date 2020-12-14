@@ -1,9 +1,12 @@
+import './bootstrap';
+
 import Koa from 'koa';
+import { Server } from 'http';
+import { Connection } from 'typeorm';
 
-import Router from '@koa/router';
-
-import { config } from './config';
-import { logger } from './logger';
+import { config } from '@config';
+import { logger } from '@logger';
+import { apiRouter } from '@infra/web/routes';
 
 // eslint-disable-next-line no-shadow
 export enum OsSignals {
@@ -17,14 +20,14 @@ export enum OsSignals {
 }
 
 export class Application {
-  protected shuttingDown = false;
-
   private counters = new Map<OsSignals, number>();
 
+  private server: Server;
+
   constructor(
+    private readonly connection: Connection,
     private readonly http = new Koa(),
-    private readonly router = new Router(),
-    protected log = logger(__filename),
+    private readonly log = logger(__filename),
   ) {
     Object.values(OsSignals).forEach((signal) => {
       this.counters.set(signal, 0);
@@ -39,14 +42,10 @@ export class Application {
       this.log.error({ reason: reason.toString(), promise: promise.toString() }, 'unhandled rejection at promise');
     });
 
-    this.router.get(['/health', '/ping'], (ctx) => {
-      ctx.status = 200;
-    });
-
-    this.http
-      .use(this.router.routes())
-      .use(this.router.allowedMethods())
-      .listen(config.appPort, () => this.log.info(`short-messages api app running on port ${config.appPort}.`));
+    this.server = this.http
+      .use(apiRouter.routes())
+      .use(apiRouter.allowedMethods())
+      .listen(config.appPort, () => this.log.info(`ShortMessages API running on port ${config.appPort}.`));
   }
 
   private eventListener(signal: OsSignals) {
@@ -58,7 +57,10 @@ export class Application {
     this.log.info(`${signal} event received ${force ? 'force' : ''}`);
 
     this.gracefulShutdown(force)
-      .then(() => process.exit(0))
+      .then(() => {
+        this.server.close();
+        process.exit(0);
+      })
       .catch((err) => {
         if (err instanceof Error) {
           this.log.error(err.message);
@@ -72,11 +74,9 @@ export class Application {
       throw new Error('Could not close connections in time, forcefully shutting down');
     }
 
-    // db disconnected
+    await this.connection.close();
+    this.log.info('DB connection closed');
 
-    this.log.info('db disconnect');
-
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-    return Promise.resolve(null);
+    return Promise.resolve();
   }
 }

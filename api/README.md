@@ -9,12 +9,6 @@ npm ci
 #### Run Migrations
 
 ```bash
-npm run typeorm:cli -- schema:sync
-```
-
-#### Run Migrations
-
-```bash
 npm run typeorm:cli -- migration:run
 ```
 

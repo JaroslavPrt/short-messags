@@ -1,11 +1,11 @@
 import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
-import { UserOrmEntity } from './user';
+import { UserOrmEntity } from './user.orm-entity';
 
 @Entity('posts')
 export class PostOrmEntity {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id?: string;
 
   @Column({ type: 'varchar', length: 255 })
   title: string;
@@ -14,11 +14,11 @@ export class PostOrmEntity {
   body: string;
 
   @CreateDateColumn()
-  createdAt: Date;
+  createdAt?: Date;
 
   @UpdateDateColumn()
-  updatedAt: Date;
+  updatedAt?: Date;
 
   @ManyToOne(() => UserOrmEntity, (user) => user.id)
-  user: UserOrmEntity;
+  user?: UserOrmEntity;
 }

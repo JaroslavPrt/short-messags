@@ -12,7 +12,6 @@
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "eslint \"src/**/*.ts\" --fix",
     "lint-staged": "lint-staged",
-    "db:schema:sync": "ts-node ./node_modules/typeorm/cli.js schema:sync -f ./src/db/config.cli.ts",
     "typeorm:cli": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js -f ./src/infrastructure/persistence/config.cli.ts"
   },
   "author": "",
@@ -34,6 +33,7 @@
     "eslint-plugin-prettier": "^3.2.0",
     "husky": "^4.2.5",
     "lint-staged": "^10.3.0",
+    "nodemon": "^2.0.6",
     "prettier": "^2.2.1",
     "pretty-quick": "^3.0.0",
     "ts-node": "^9.0.0",

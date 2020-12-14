@@ -26,7 +26,5 @@
     "**/dist": true
   },
   "cSpell.words": ["typeorm"],
-  "typescript.preferences.importModuleSpecifier": "non-relative",
-  "javascript.suggest.completeFunctionCalls": true,
-  "importSorter.generalConfiguration.sortOnBeforeSave": true
+  "javascript.suggest.completeFunctionCalls": true
 }
