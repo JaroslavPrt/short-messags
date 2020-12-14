@@ -10,19 +10,14 @@ COPY --chown=node:node package.json package-lock*.json ./
 FROM base as source
 COPY --chown=node:node . .
 
-FROM source as audit
-USER root
-RUN npm audit --audit-level critical
-
 FROM source as build
 ENV NODE_ENV=development
 RUN npm ci
-RUN npm run build
+RUN npm run prebuild && npm run build
 
 FROM base as prod
 ENV NODE_ENV=production
 RUN npm ci --production && npm cache clean --force
 COPY --from=build /usr/src/app/dist/ ./dist
-COPY --from=source /usr/src/app/config/ /usr/src/app/config/
 ENTRYPOINT ["tini", "--"]
-CMD ["node", "./dist/applications/main.js"]
+CMD ["node", "./dist/src/main.js"]

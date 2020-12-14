@@ -1,6 +1,16 @@
 version: "3"
 
 services:
+  api:
+    build: api/
+    command: node ./dist/src/main.js
+    ports:
+      - "3000:3000"
+    networks:
+      - api
+    depends_on:
+      - postgres
+
   postgres:
     image: "postgres:11-alpine"
     environment:
@@ -11,6 +21,9 @@ services:
       - sm-pg-data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
+    networks:
+      - api
+      - db
 
   pgadmin:
     image: dpage/pgadmin4:4.24
@@ -22,7 +35,15 @@ services:
     environment:
       - PGADMIN_DEFAULT_EMAIL=admin
       - PGADMIN_DEFAULT_PASSWORD=admin
+    networks:
+      - db
+    depends_on:
+      - postgres
 
 volumes:
   sm-pg-data:
   sm-pg-admin:
+
+networks:
+  api:
+  db:

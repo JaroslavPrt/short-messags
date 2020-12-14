@@ -4,7 +4,7 @@ import Koa from 'koa';
 import { Server } from 'http';
 import { Connection } from 'typeorm';
 
-import { config } from '@config';
+import { appConfig } from '@config';
 import { logger } from '@logger';
 import { apiRouter } from '@infra/web/routes';
 
@@ -45,7 +45,7 @@ export class Application {
     this.server = this.http
       .use(apiRouter.routes())
       .use(apiRouter.allowedMethods())
-      .listen(config.appPort, () => this.log.info(`ShortMessages API running on port ${config.appPort}.`));
+      .listen(appConfig.appPort, () => this.log.info(`ShortMessages API running on port ${appConfig.appPort}.`));
   }
 
   private eventListener(signal: OsSignals) {

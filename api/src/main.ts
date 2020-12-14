@@ -1,3 +1,7 @@
+/* eslint-disable import/first */
+// eslint-disable-next-line @typescript-eslint/dot-notation
+process.env['NODE_CONFIG_DIR'] = `${__dirname}/config`;
+
 import './bootstrap';
 
 import { getConnection } from '@infra/persistence/connection';

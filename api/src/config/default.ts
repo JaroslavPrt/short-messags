@@ -1,6 +1,6 @@
 export default {
   Customer: {
-    appPort: 7000,
+    appPort: 3000,
     logLevel: 'silly',
     database: {
       type: 'postgres',

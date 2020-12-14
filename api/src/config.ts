@@ -1,10 +1,5 @@
-/* eslint-disable import/first */
 /* eslint-disable class-methods-use-this */
-
-// eslint-disable-next-line @typescript-eslint/dot-notation
-process.env['NODE_CONFIG_DIR'] = `${__dirname}/config`;
-
-import { get, has, util } from 'config';
+import config from 'config';
 import { TLogLevelName } from 'tslog';
 
 // eslint-disable-next-line no-shadow
@@ -13,17 +8,17 @@ export enum AppEnvironments {
   production = 'production',
 }
 
-class Config {
+class AppConfig {
   get nodeEnv(): AppEnvironments {
-    return (util.getEnv('NODE_ENV') as AppEnvironments) ?? AppEnvironments.development;
+    return (config.util.getEnv('NODE_ENV') as AppEnvironments) ?? AppEnvironments.development;
   }
 
   get appPort(): number {
-    return get('Customer.appPort') ?? 3000;
+    return config.get('Customer.appPort') ?? 3000;
   }
 
   get LogLevel(): TLogLevelName {
-    return get('Customer.logLevel') || 'silly';
+    return config.get('Customer.logLevel') ?? 'silly';
   }
 
   get database(): {
@@ -33,12 +28,12 @@ class Config {
     password: string;
     database: string;
   } {
-    return get('Customer.database');
+    return config.get('Customer.database');
   }
 
   byKey(key: string): string | number | boolean {
-    return has('key') && get(key);
+    return config.has('key') && config.get(key);
   }
 }
 
-export const config = new Config();
+export const appConfig = new AppConfig();

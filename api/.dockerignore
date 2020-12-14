@@ -6,6 +6,6 @@ npm-debug.log
 .editorconfig
 .gitignore
 .npmrc
-docker-compose*.yml
-.env
+.nvmrc
+nodemon.json
 README.md

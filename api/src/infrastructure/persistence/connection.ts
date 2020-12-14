@@ -2,11 +2,11 @@ import { resolve } from 'path';
 import { Connection, ConnectionOptions, createConnection, getConnection as tGetConnection } from 'typeorm';
 import { AlreadyHasActiveConnectionError } from 'typeorm/error/AlreadyHasActiveConnectionError';
 
-import { config } from '@config';
+import { appConfig } from '@config';
 
 export const connectionConfig: ConnectionOptions = {
   type: 'postgres',
-  ...config.database,
+  ...appConfig.database,
   synchronize: false,
   migrationsRun: false,
   entities: [resolve(__dirname, './orm-entities/*.{js,ts}')],

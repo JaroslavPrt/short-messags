@@ -43,8 +43,8 @@ export class seed1607901286301 implements MigrationInterface {
 
   public async up(queryRunner: QueryRunner): Promise<void> {
     const { raw } = await queryRunner.manager.createQueryBuilder().insert().into('users').values(seedUsers).execute();
-    let seedPosts: Partial<PostOrmEntity>[] = [];
 
+    let seedPosts: Partial<PostOrmEntity>[] = [];
     for (const r of raw) {
       seedPosts = seedPosts.concat(generateUserSeedPosts(r));
     }
