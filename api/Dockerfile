@@ -19,5 +19,5 @@ FROM base as prod
 ENV NODE_ENV=production
 RUN npm ci --production && npm cache clean --force
 COPY --from=build /usr/src/app/dist/ ./dist
-ENTRYPOINT ["tini", "--"]
-CMD ["node", "./dist/src/main.js"]
+# ENTRYPOINT ["tini", "--"]
+# CMD ["node", "./dist/src/main.js"]

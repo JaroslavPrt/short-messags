@@ -1,0 +1,9 @@
+{
+  "Customer": {
+    "appPort": 3000,
+    "logLevel": "debug",
+    "database": {
+      "host": "postgres"
+    }
+  }
+}

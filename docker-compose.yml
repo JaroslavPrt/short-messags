@@ -3,7 +3,7 @@ version: "3"
 services:
   api:
     build: api/
-    command: node ./dist/src/main.js
+    command: sh -c "npm run db:migration && npm start"
     ports:
       - "3000:3000"
     networks:
